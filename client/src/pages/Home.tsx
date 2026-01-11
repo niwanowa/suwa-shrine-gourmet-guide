@@ -23,6 +23,20 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
+      {/* Credit Section */}
+      <div className="bg-gradient-to-r from-slate-50 to-slate-100 border-b border-slate-200">
+        <div className="container py-3">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-2 text-center sm:text-left">
+            <p className="text-sm text-slate-600">
+              <span className="font-medium text-slate-700">このページは</span>
+              <span className="text-slate-500"> 2026年1月11日に</span>
+              <span className="font-medium text-slate-700"> Manus </span>
+              <span className="text-slate-500">で作成されました</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <HeroSection onExplore={handleExplore} />
 
