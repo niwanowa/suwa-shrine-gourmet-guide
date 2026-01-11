@@ -2,18 +2,28 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
+import { useLocation } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 
+// Get base path from environment or Vite config
+const BASE_PATH = import.meta.env.BASE_URL || "/";
 
 function Router() {
+  const [location] = useLocation();
+  
+  // Handle root path and GitHub Pages subpath
+  const isHome = location === "/" || location === BASE_PATH || location === BASE_PATH.replace(/\/$/, "");
+  
   return (
     <Switch>
       <Route path={"/"} component={Home} />
+      <Route path={BASE_PATH} component={Home} />
+      <Route path={BASE_PATH.replace(/\/$/, "")} component={Home} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
-      <Route component={NotFound} />
+      <Route component={isHome ? Home : NotFound} />
     </Switch>
   );
 }
